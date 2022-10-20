@@ -5,6 +5,16 @@ import Clock from 'react-live-clock';
 import { useEffect, useState } from 'react'
 
 export default function Home() {
+    const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,11 +23,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+    <main className={styles.main}>
         <Clock
           format={'hh:mm:ssa'}
           style={{fontSize: '10em'}}
           ticking={true} />
-
+    </main>
     </div>
   )
 }
