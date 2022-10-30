@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import Clock from 'react-live-clock';
 import { useEffect, useState } from 'react'
 
+
 export default function Home() {
     const [hasMounted, setHasMounted] = useState(false);
 
@@ -24,11 +25,63 @@ export default function Home() {
       </Head>
 
     <main className={styles.main}>
-        <Clock
-          format={'hh:mm:ssa'}
-          style={{fontSize: '10em'}}
-          ticking={true} />
+        <Datetime/> 
     </main>
     </div>
   )
 }
+
+function Datetime() {
+
+return (
+    <div>
+    <GetDate/>
+    <TimeGet/>
+    </div>
+    )
+
+}
+
+function TimeGet() {
+    const [hasMounted, setHasMounted] = useState(false);
+
+      useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return (
+            <h1>Unable to Derive Time</h1>
+    )
+  }
+
+return (
+        <Clock
+          format={'hh:mm:ssa'}
+          style={{fontSize: '10em'}}
+          ticking={true} />
+    )
+}
+
+function GetDate() {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    const [date, setCheck] = useState(new Date());
+
+    useEffect(() => {
+        const id = setInterval(() => {
+            setCheck(new Date());
+        }, 1000);
+        
+        return () => clearInterval(id);
+    }, [date])
+
+    return (
+        <h1> 
+        {days[date.getDay()]} {months[date.getMonth()]} {date.getDate()} {date.getFullYear()}
+        </h1>
+    )
+
+}
+
