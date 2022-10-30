@@ -72,7 +72,7 @@ function GetDate() {
     useEffect(() => {
         const id = setInterval(() => {
             setCheck(new Date());
-        }, 1000);
+        }, 60000);
         
         return () => clearInterval(id);
     }, [date])
