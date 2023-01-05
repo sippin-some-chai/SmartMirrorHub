@@ -3,18 +3,22 @@
 }
 
 .main {
-  min-height: 100vh;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+}
+
+.datadivider {
+ border-top: 1px solid black;
+}
+
+.date {
   justify-content: center;
   align-items: center;
+  font-size: 4rem;
 }
-
-.clock {
-  font-size: 2rem;
+.list {
+  padding: 10rem 10rem;
+  justify-content: bottom;
+  align-items: center;
 }
-
 .footer {
   display: flex;
   flex: 1;
