@@ -15,8 +15,9 @@
   font-size: 4rem;
 }
 .list {
-  padding: 10rem 10rem;
-  justify-content: bottom;
+  font-size: 1.5rem;
+  padding: 54rem 1rem;
+  justify-content: center;
   align-items: center;
 }
 .footer {

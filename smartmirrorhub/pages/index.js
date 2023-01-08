@@ -6,6 +6,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText'
 import { useEffect, useState } from 'react'
 import { FixedSizeList as List } from 'react-window';
+import useSWR from 'swr';
 
 export default function Home({data}) {
     const [hasMounted, setHasMounted] = useState(false);
@@ -14,7 +15,7 @@ export default function Home({data}) {
     setHasMounted(true);
   }, []);
 
-  if (!hasMounted || !data) {
+  if (!hasMounted) {
     return null;
   }
 
@@ -28,14 +29,7 @@ export default function Home({data}) {
 
     <main className={styles.main}>
         <Datetime className={styles.clock}/>
-        <ul className={styles.list}>
-            <div className={styles.datadivider}/>
-            {data.map((post) => (
-                <li><span>{post.Type}</span>: 
-                    <span> {post.Total}</span>
-                </li>
-             ))}
-    </ul>
+        <GetData/>
     </main>
     </div>
   )
@@ -93,6 +87,39 @@ function GetDate() {
     )
 }
 
+function GetData() {
+    const [current, setCurrent] = useState(null);
+    const [next, setNext] = useState(null);
+
+   console.log("Input");
+   const fetcher = (url) => fetch(url).then((res) => res.json()).then((data) => setNext(data));
+   const { input, error, isLoading } = useSWR('/api/finances/itemization', fetcher, { refreshInterval: 20000 })
+
+
+   if (current != next) {
+        setCurrent(next);
+        console.log("ope");
+    }
+
+
+    if(!current) {
+        return (
+            <h1> WHoops</h1>
+        )
+    }
+ 
+return (
+        <ul className={styles.list}>
+            <div className={styles.datadivider}/>
+            {current.map((post) => (
+                <li><span>{post.Type}</span>:
+                    <span> {post.Total}</span>
+                </li>
+             ))}
+    </ul>
+)
+}
+
 export async function getStaticProps() {
 // get the client
 let mysql = require('mysql2/promise');
@@ -100,16 +127,17 @@ let mysql = require('mysql2/promise');
  var dummy = [];
 // create the connection to database
 let connection = await mysql.createConnection({
-  host: '<>',
-  user: '<>',
-  password: '<>',
-  database: '<>'
+    host     : '192.168.1.137',
+    database : 'finances',
+    user     : 'bard',
+    password : 'ShilledPassivity678#'
 });
 
 // execute will internally call prepare and query
 let [rows,fields]= await connection.execute(
-  'SELECT * FROM ``',[2,2]
+  'SELECT * FROM `itemization`',[2,2]
 );
     data = rows;
+    console.log(data);
     return {props: {data}};
 }
