@@ -7,10 +7,10 @@ let mysql = require('mysql2/promise');
  var dummy = [];
 // create the connection to database
 let connection = await mysql.createPool({
-  host: '<>',
-  user: '<>',
-  password: '<>',
-  database: '<>',
+  host: '192.168.1.137',
+  user: 'bard',
+  password: 'ShilledPassivity678#',
+  database: 'finances',
   waitForConnections: true,
   connectionLimit:0,
   queueLimit: 0

@@ -9,15 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "fs": "^0.0.1-security",
     "mysql2": "^2.3.3",
+    "net": "^1.0.2",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-window": "^1.8.8"
+    "react-window": "^1.8.8",
+    "serverless-mysql": "^1.5.4",
+    "spotify-web-api-node": "^5.0.2",
+    "swr": "^2.0.0",
+    "tls": "^0.0.1"
   },
   "devDependencies": {
     "eslint": "8.25.0",
     "eslint-config-next": "12.3.1"
   },
-  "browser": { "fs": false, "path": false, "os": false, "net": false, "tls": false }
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "net": false,
+    "tls": false
+  }
 }

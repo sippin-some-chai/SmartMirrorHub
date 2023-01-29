@@ -113,7 +113,7 @@ return (
             <div className={styles.datadivider}/>
             {current.map((post) => (
                 <li><span>{post.Type}</span>:
-                    <span> {post.Total}</span>
+                    <span> ${post.Total.toFixed(2)}</span>
                 </li>
              ))}
     </ul>
