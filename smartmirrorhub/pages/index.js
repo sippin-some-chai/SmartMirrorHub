@@ -29,6 +29,7 @@ export default function Home({data}) {
 
     <main className={styles.main}>
         <Datetime className={styles.clock}/>
+        <GetMusic/>
         <GetData/>
     </main>
     </div>
@@ -91,14 +92,13 @@ function GetData() {
     const [current, setCurrent] = useState(null);
     const [next, setNext] = useState(null);
 
-   console.log("Input");
    const fetcher = (url) => fetch(url).then((res) => res.json()).then((data) => setNext(data));
    const { input, error, isLoading } = useSWR('/api/finances/itemization', fetcher, { refreshInterval: 20000 })
 
 
    if (current != next) {
         setCurrent(next);
-        console.log("ope");
+        console.log("Shifting Data");
     }
 
 
@@ -107,8 +107,23 @@ function GetData() {
             <h1> WHoops</h1>
         )
     }
+
+//Remove this to get DB again
  
 return (
+      <div className = {styles.bottomcontainer}>
+        <ul className={styles.list}>
+            <div className={styles.datadivider}/>
+            <li> Water Plans </li>
+            <li> Daily Vitamins </li>
+            <li> Strech </li>
+        </ul>
+    </div>
+)
+
+
+return (
+      <div className = {styles.bottomcontainer}>
         <ul className={styles.list}>
             <div className={styles.datadivider}/>
             {current.map((post) => (
@@ -116,7 +131,48 @@ return (
                     <span> ${post.Total.toFixed(2)}</span>
                 </li>
              ))}
-    </ul>
+        </ul>
+    </div>
+)
+}
+
+function GetMusic() {
+    const [current, setCurrent] = useState(null);
+
+   const fetcher = (url) => fetch(url).then((res) => res.json()).then((data) => setCurrent(data));
+   const { input, error, isLoading } = useSWR('/api/spotify/current-playing', fetcher, { refreshInterval: 1000 })
+
+
+   if (current == null) {
+        return ( <span> Loading </span>)
+    }
+
+    if (!current.isPlaying) {
+        return (
+                <span> Not Playing </span>
+        )
+    
+    } else {
+        return (
+                <div className = {styles.playing}>
+                <span> Playing: {current.title} </span> <br/>
+                <span> Album:   {current.album} </span> <br/>
+                <span> Artist:  {current.artist} </span>
+                </div>
+        )
+    }
+
+//    if(!current) {
+//        return (
+//            <h1> WHoops</h1>
+//        )
+//    }
+
+return (
+        <ul className={styles.list}>
+            <div className={styles.datadivider}/>
+            
+        </ul>
 )
 }
 
