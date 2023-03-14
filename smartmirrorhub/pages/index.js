@@ -30,7 +30,7 @@ export default function Home({data}) {
     <main className={styles.main}>
         <Datetime className={styles.clock}/>
         <GetMusic/>
-        <GetData/>
+        <GetData className={styles.child}/>
     </main>
     </div>
   )
