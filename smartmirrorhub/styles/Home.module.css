@@ -1,9 +1,24 @@
 .container {
+  position: relative;
   padding: 0 2rem;
+  background-color: #000000;
+  height: 1650px;
+  width: 1080px;
+  color: #ffffff;
+.child {
+  background-color: #000000;
+  color: #ffffff;
+  position: absolute;
+  bottom: 0;
+
+}
 }
 
 .main {
+  background-color: #000000;
+  color: #ffffff;
 }
+
 
 .datadivider {
  border-top: 1px solid black;
@@ -16,8 +31,5 @@
 }
 .list {
   font-size: 1.5rem;
-  padding: 54rem 1rem;
-  justify-content: center;
-  align-items: center;
 }
 
