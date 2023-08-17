@@ -22,9 +22,13 @@ const getAccessToken = async () => {
 export const currentlyPlayingSong = async () => {
 	  const { access_token } = await getAccessToken();
 
-	  return fetch("https://api.spotify.com/v1/me/player/currently-playing", {
-		      headers: {
-			            Authorization: `Bearer ${access_token}`,
-			          },
-		    });
+      const spotData = fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+              headers: {
+                        Authorization: `Bearer ${access_token}`,
+                      },
+            });
+     if (!spotData.ok) {
+        return null;
+     }
+    return spotData;
 };
