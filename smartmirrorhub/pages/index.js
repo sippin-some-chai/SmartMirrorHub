@@ -179,10 +179,10 @@ let mysql = require('mysql2/promise');
  var dummy = [];
 // create the connection to database
 let connection = await mysql.createConnection({
-    host     : '192.168.1.137',
+    host     : process.env.DB_IP,
     database : 'finances',
-    user     : 'bard',
-    password : 'ShilledPassivity678#'
+    user     : process.env.DB_USER,
+    password : process.env.DB_PASS 
 });
 
 // execute will internally call prepare and query
