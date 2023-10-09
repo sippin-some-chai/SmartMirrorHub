@@ -1,11 +1,11 @@
 const getAccessToken = async () => {
-	  const refresh_token = process.env.SPOTIFY_REFRESH
+	  const refresh_token = process.env.SPOTIFY_REFRESH;
 
 	  const response = await fetch("https://accounts.spotify.com/api/token", {
 		      method: "POST",
 		      headers: {
 			            Authorization: `Basic ${Buffer.from(
-					            `SPOTIFY_AUTH`
+					            process.env.SPOTIFY_AUTH
 					          ).toString("base64")}`,
 			            "Content-Type": "application/x-www-form-urlencoded",
 			          },
@@ -27,8 +27,8 @@ export const currentlyPlayingSong = async () => {
                         Authorization: `Bearer ${access_token}`,
                       },
             });
-     if (!spotData.ok) {
-        return null;
-     }
+//     if (spotData.ok) {
+//        return null;
+//     }
     return spotData;
 };
